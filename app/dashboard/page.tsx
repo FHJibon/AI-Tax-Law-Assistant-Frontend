@@ -15,6 +15,7 @@ import {
   DollarSign,
   PieChart,
   Download,
+  Calculator,
   User,
   Phone,
   Mail,
@@ -31,51 +32,30 @@ export default function DashboardPage() {
   const stats = [
     {
       title: t('dashboard.income'),
-      value: '৳ 8,50,000',
+      value: '-',
       icon: DollarSign,
       trend: { value: 12, isPositive: true },
       color: 'green' as const
     },
     {
       title: t('dashboard.tax'),
-      value: '৳ 45,000',
+      value: '-',
       icon: PieChart,
       trend: { value: 5, isPositive: false },
-      color: 'red' as const
+      color: 'purple' as const
     }
   ]
 
   const userData = {
-    name: 'Md. Rahman Ahmed',
-    mobile: '+880 1712-345678',
-    email: 'rahman.ahmed@email.com',
-    address: 'House 42, Road 5, Dhanmondi, Dhaka-1205',
-    tin: '123456789012',
-    nid: '1990123456789',
-    dateOfBirth: '1990-05-15',
-    occupation: 'Software Engineer'
+    name: '',
+    mobile: '',
+    email: '',
+    address: '',
+    tin: '',
+    nid: '',
+    dateOfBirth: '',
+    occupation: ''
   }
-
-  const taxAdvice = [
-    {
-      title: 'Maximize Your Tax Savings',
-      description: 'You can save up to ৳15,000 more by investing in approved savings schemes',
-      action: 'Learn More',
-      icon: TrendingUp
-    },
-    {
-      title: 'Upcoming Deadline',
-      description: 'Tax return submission deadline is approaching. File by November 30, 2024',
-      action: 'File Now',
-      icon: Calendar
-    },
-    {
-      title: 'Document Reminder',
-      description: 'Keep your salary certificate and bank statements ready for next year',
-      action: 'Upload',
-      icon: FileText
-    }
-  ]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
@@ -92,10 +72,7 @@ export default function DashboardPage() {
                 Welcome back! Here&apos;s your tax overview.
               </p>
             </div>
-            <Button className="flex items-center space-x-2">
-              <Download className="h-4 w-4" />
-              <span>Export Report</span>
-            </Button>
+            {/* header actions removed */}
           </div>
         </div>
 
@@ -143,7 +120,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Full Name</p>
-                      <p className="font-medium">{userData.name}</p>
+                      <p className="font-medium">{userData.name || '—'}</p>
                     </div>
                   </div>
                   
@@ -153,7 +130,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Mobile Number</p>
-                      <p className="font-medium">{userData.mobile}</p>
+                      <p className="font-medium">{userData.mobile || '—'}</p>
                     </div>
                   </div>
                   
@@ -163,7 +140,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Email Address</p>
-                      <p className="font-medium">{userData.email}</p>
+                      <p className="font-medium">{userData.email || '—'}</p>
                     </div>
                   </div>
                   
@@ -173,7 +150,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Address</p>
-                      <p className="font-medium">{userData.address}</p>
+                      <p className="font-medium">{userData.address || '—'}</p>
                     </div>
                   </div>
                   
@@ -183,7 +160,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">TIN Number</p>
-                      <p className="font-medium">{userData.tin}</p>
+                      <p className="font-medium">{userData.tin || '—'}</p>
                     </div>
                   </div>
                   
@@ -193,7 +170,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">NID Number</p>
-                      <p className="font-medium">{userData.nid}</p>
+                      <p className="font-medium">{userData.nid || '—'}</p>
                     </div>
                   </div>
                   
@@ -203,7 +180,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Date of Birth</p>
-                      <p className="font-medium">{new Date(userData.dateOfBirth).toLocaleDateString('en-GB', { timeZone: 'UTC' })}</p>
+                      <p className="font-medium">{userData.dateOfBirth ? new Date(userData.dateOfBirth).toLocaleDateString('en-GB', { timeZone: 'UTC' }) : '—'}</p>
                     </div>
                   </div>
                   
@@ -213,7 +190,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Occupation</p>
-                      <p className="font-medium">{userData.occupation}</p>
+                      <p className="font-medium">{userData.occupation || '—'}</p>
                     </div>
                   </div>
                 </div>
@@ -223,44 +200,6 @@ export default function DashboardPage() {
 
           {/* Sidebar */}
           <div className="flex flex-col h-full">
-            {/* Tax Advice */}
-            <Card className="flex-1 mb-6 flex flex-col">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <BarChart3 className="h-5 w-5" />
-                  <span>{t('dashboard.advice')}</span>
-                </CardTitle>
-                <CardDescription>
-                  Personalized tax tips and recommendations
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4 flex-1">
-                <div className="h-full flex flex-col justify-around">
-                  {taxAdvice.map((advice, index) => {
-                  const Icon = advice.icon
-                  return (
-                    <div key={index} className="p-4 bg-muted/50 rounded-lg">
-                      <div className="flex items-start space-x-3">
-                        <div className="p-2 bg-primary/10 rounded-lg">
-                          <Icon className="h-4 w-4 text-primary" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-medium text-sm mb-1">{advice.title}</h4>
-                          <p className="text-xs text-muted-foreground mb-3">
-                            {advice.description}
-                          </p>
-                          <Button variant="outline" size="sm" className="h-7 px-3 text-xs">
-                            {advice.action}
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })}
-                </div>
-              </CardContent>
-            </Card>
-
             {/* Quick Actions */}
             <Card>
               <CardHeader>
@@ -270,10 +209,10 @@ export default function DashboardPage() {
                 <Button 
                   className="w-full justify-start" 
                   variant="outline"
-                  onClick={() => router.push('/workspace')}
+                  onClick={() => router.push('/calculation')}
                 >
-                  <FileText className="h-4 w-4 mr-2" />
-                  File New Return
+                  <Calculator className="h-4 w-4 mr-2" />
+                  Open Calculator
                 </Button>
                 <Button 
                   className="w-full justify-start" 

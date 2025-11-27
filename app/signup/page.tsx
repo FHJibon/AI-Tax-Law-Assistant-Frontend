@@ -200,9 +200,6 @@ export default function SignupPage() {
               <Button variant="outline" className="w-full">
                 Continue with Google
               </Button>
-              <Button variant="outline" className="w-full">
-                Continue with Facebook
-              </Button>
             </div>
 
             {/* Login Link */}

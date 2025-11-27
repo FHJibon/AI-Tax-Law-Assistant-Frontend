@@ -112,7 +112,6 @@ export default function ChatPage() {
                     className="w-full text-left h-auto p-3 justify-start"
                     onClick={() => {
                       // In a real implementation, this would send the question to the chat
-                      console.log('Quick question clicked:', item.question)
                     }}
                   >
                     <div className="text-sm">

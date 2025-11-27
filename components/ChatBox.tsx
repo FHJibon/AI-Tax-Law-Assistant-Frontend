@@ -23,15 +23,30 @@ export function ChatBox({ className }: ChatBoxProps) {
   const [messages, setMessages] = React.useState<Message[]>([])
   const [inputMessage, setInputMessage] = React.useState('')
   const [isTyping, setIsTyping] = React.useState(false)
-  const messagesEndRef = React.useRef<HTMLDivElement>(null)
+  const messagesEndRef = React.useRef<HTMLDivElement | null>(null)
+  const messagesContainerRef = React.useRef<HTMLDivElement | null>(null)
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  const scrollToBottom = (behavior: ScrollBehavior = 'auto') => {
+    const container = messagesContainerRef.current
+    if (container) {
+      try {
+        container.scrollTo({ top: container.scrollHeight, behavior })
+        return
+      } catch (err) {
+        // ignore and fallback to anchor
+      }
+    }
+
+    if (messagesEndRef.current) {
+      try {
+        messagesEndRef.current.scrollIntoView({ behavior, block: 'end' })
+      } catch (err) {
+        setTimeout(() => {
+          if (container) container.scrollTop = container.scrollHeight
+        }, 50)
+      }
+    }
   }
-
-  React.useEffect(() => {
-    scrollToBottom()
-  }, [messages])
 
   // Initialize welcome message on client to avoid SSR hydration mismatch with Date
   React.useEffect(() => {
@@ -58,32 +73,46 @@ export function ChatBox({ className }: ChatBoxProps) {
     setMessages(prev => [...prev, userMessage])
     setInputMessage('')
     setIsTyping(true)
+    // try to scroll after the user message is added
+    setTimeout(() => scrollToBottom('auto'), 50)
 
     // Simulate AI response
     setTimeout(() => {
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: `I understand you're asking about "${inputMessage}". This is a simulated response from the AI Tax Assistant. In a real implementation, this would connect to your backend API to process tax and legal queries.`,
+        content: ` This is a simulated response from the AI Tax Assistant. Connect backend API`,
         sender: 'assistant',
         timestamp: new Date(),
       }
       setMessages(prev => [...prev, assistantMessage])
       setIsTyping(false)
+      // ensure scroll after assistant reply is appended
+      setTimeout(() => scrollToBottom('auto'), 50)
     }, 2000)
   }
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       sendMessage()
     }
   }
 
+  // Auto-scroll to the bottom when messages update or typing state changes
+  React.useEffect(() => {
+    const raf = requestAnimationFrame(() => scrollToBottom('smooth'))
+    const t = setTimeout(() => scrollToBottom('auto'), 150)
+    return () => {
+      cancelAnimationFrame(raf)
+      clearTimeout(t)
+    }
+  }, [messages, isTyping])
+
   return (
-    <Card className={`h-[600px] flex flex-col ${className || ''}`}>
-      <CardContent className="flex-1 flex flex-col p-0">
+    <Card className={`flex flex-col ${className || ''}`}>
+      <CardContent className="flex-1 flex flex-col p-0 min-h-0">
         {/* Messages Area */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
           {messages.map((message) => (
               <div
                 key={message.id}
@@ -111,7 +140,8 @@ export function ChatBox({ className }: ChatBoxProps) {
                   </div>
                   <div
                     className={`
-                      rounded-2xl px-4 py-2 break-words
+                      rounded-2xl px-4 py-2 break-words whitespace-pre-wrap
+                      ${message.sender === 'assistant' ? 'max-h-48 overflow-y-auto' : ''}
                       ${message.sender === 'user'
                         ? 'bg-primary text-primary-foreground'
                         : 'bg-muted text-muted-foreground'
@@ -142,28 +172,31 @@ export function ChatBox({ className }: ChatBoxProps) {
               </div>
             </div>
           )}
-          
           <div ref={messagesEndRef} />
         </div>
 
         {/* Input Area */}
-        <div className="border-t p-4">
-          <div className="flex space-x-2">
-            <Input
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder={t('chat.placeholder')}
-              className="flex-1"
-              disabled={isTyping}
-            />
-            <Button
-              onClick={sendMessage}
-              disabled={!inputMessage.trim() || isTyping}
-              size="icon"
-            >
-              <Send className="h-4 w-4" />
-            </Button>
+        <div className="border-t p-3">
+          <div className="flex items-center">
+            <div className="flex items-center w-full bg-muted/5 border border-muted-foreground/20 rounded-lg">
+              <Input
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder={t('chat.placeholder')}
+                className="flex-1 bg-transparent border-none rounded-l-lg px-4 py-2 placeholder:text-muted-foreground"
+                disabled={isTyping}
+              />
+              <Button
+                variant="ghost"
+                onClick={sendMessage}
+                disabled={!inputMessage.trim() || isTyping}
+                size="icon"
+                className="h-10 w-10 p-0 rounded-r-lg bg-muted/10 hover:bg-muted/20 mr-1"
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
       </CardContent>

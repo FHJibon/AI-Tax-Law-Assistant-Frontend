@@ -65,10 +65,7 @@ export function DashboardCard({
                     : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
                 }`}
               >
-                {trend.isPositive ? '↗' : '↘'} {Math.abs(trend.value)}%
-              </span>
-              <span className="text-muted-foreground">
-                from last month
+                {trend.isPositive ? '↗' : '↘'}
               </span>
             </div>
           )}
@@ -133,11 +130,9 @@ export function StatsCard({ title, value, icon: Icon, trend, color = 'blue' }: S
                       trend.isPositive ? 'text-green-600' : 'text-red-600'
                     }`}
                   >
-                    {trend.value === 0 ? '' : `${trend.isPositive ? '↗' : '↘'} ${Math.abs(trend.value)}%`}
+                    {trend.value === 0 ? '' : (trend.isPositive ? '↗' : '↘')}
                   </span>
-                  <span className="text-xs text-muted-foreground ml-2">
-                    {trend.value === 0 ? 'All time' : 'vs last month'}
-                  </span>
+                  {/* removed comparative label per design */}
                 </div>
               )}
             </div>

@@ -21,13 +21,17 @@ interface FileUploaderProps {
   acceptedTypes?: string[]
   maxFiles?: number
   maxSize?: number // in MB
+  hideInfo?: boolean
+  showSizeNote?: boolean
 }
 
 export function FileUploader({ 
   onFilesUpload, 
-  acceptedTypes = ['.pdf', '.doc', '.docx', '.jpg', '.jpeg', '.png', 'application/pdf', 'image/jpeg', 'image/png', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+  acceptedTypes = ['.pdf', '.jpg', '.jpeg', '.png', 'application/pdf', 'image/jpeg', 'image/png'],
   maxFiles = 5,
-  maxSize = 10 
+  maxSize = 5,
+  hideInfo = false,
+  showSizeNote = true,
 }: FileUploaderProps) {
   const { t } = useI18n()
   const [files, setFiles] = React.useState<FileItem[]>([])
@@ -204,7 +208,9 @@ export function FileUploader({
         >
           <Upload className="h-10 w-10 mx-auto mb-4 text-muted-foreground" />
           <p className="text-lg font-medium mb-2">{t('upload.dropzone')}</p>
-          <p className="text-sm text-muted-foreground mb-4">{t('upload.supported')}</p>
+          {!hideInfo && (
+            <p className="text-sm text-muted-foreground mb-4">{t('upload.supported')}</p>
+          )}
           <Button variant="outline">
             {t('common.upload')}
           </Button>
@@ -213,18 +219,19 @@ export function FileUploader({
         <input
           ref={fileInputRef}
           type="file"
-          multiple
+          multiple={maxFiles !== 1}
           // Accept attribute prefers comma-separated list; include both extensions and mimes
           accept={acceptedTypes.join(',')}
           onChange={handleFileSelect}
           className="hidden"
         />
 
-        {/* File Size Limits Info */}
-        <div className="text-xs text-muted-foreground text-center space-y-1">
-          <p>Maximum file size: {maxSize}MB per file</p>
-          <p>Maximum files: {maxFiles} files at once</p>
-        </div>
+        {/* File Size Limits Info - shown immediately after upload box */}
+        {showSizeNote && (
+          <div className="text-xs text-muted-foreground text-center">
+            <p>Maximum file size: {maxSize} MB</p>
+          </div>
+        )}
 
         {/* File List */}
         {files.length > 0 && (

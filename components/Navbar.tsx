@@ -14,7 +14,6 @@ import {
   Home,
   Briefcase,
   BarChart3,
-  Bell,
   LogOut
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
@@ -33,8 +32,7 @@ export function Navbar() {
     pathname?.startsWith('/profile') ||
     pathname?.startsWith('/chat') ||
     pathname?.startsWith('/upload') ||
-    pathname?.startsWith('/forms') ||
-    pathname?.startsWith('/calculator')
+    pathname?.startsWith('/forms')
 
   React.useEffect(() => {
     setMounted(true)
@@ -112,14 +110,6 @@ export function Navbar() {
 
             {isAuthenticatedPage ? (
               <>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => router.push('/notifications')}
-                  title="Notification Settings"
-                >
-                  <Bell className="h-5 w-5" />
-                </Button>
                 
                 <Button
                   variant="outline"
@@ -213,17 +203,7 @@ export function Navbar() {
             <div className="mt-3 px-2 space-y-1">
               {isAuthenticatedPage ? (
                 <>
-                  <Button 
-                    variant="outline" 
-                    className="w-full justify-start"
-                    onClick={() => {
-                      router.push('/notifications')
-                      setIsMobileMenuOpen(false)
-                    }}
-                  >
-                    <Bell className="h-4 w-4 mr-2" />
-                    Notification Settings
-                  </Button>
+                  
                   <Button 
                     variant="outline" 
                     className="w-full justify-start"

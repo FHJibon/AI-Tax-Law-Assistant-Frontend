@@ -29,7 +29,7 @@ export default function UploadPage() {
       icon: FileText,
       title: "Salary Certificate",
       description: "Annual salary certificate from employer",
-      formats: "PDF, DOC, DOCX"
+      formats: "PDF"
     },
     {
       icon: FileText,
@@ -93,7 +93,9 @@ export default function UploadPage() {
           {/* Upload Interface */}
           <div className="lg:col-span-2 space-y-6">
             <FileUploader onFilesUpload={handleFilesUpload} />
-            
+
+            {/* Supported Documents card removed as requested */}
+
             {/* Processing Steps */}
             <Card>
               <CardHeader>
@@ -136,37 +138,6 @@ export default function UploadPage() {
 
           {/* Sidebar */}
           <div className="space-y-6">
-            {/* Supported Documents */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Supported Documents</CardTitle>
-                <CardDescription>
-                  Documents you can upload for tax filing
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {supportedDocuments.map((doc, index) => {
-                  const Icon = doc.icon
-                  return (
-                    <div key={index} className="flex items-start space-x-3">
-                      <div className="flex-shrink-0 p-2 bg-primary/10 rounded-lg">
-                        <Icon className="h-4 w-4 text-primary" />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-medium text-sm">{doc.title}</h4>
-                        <p className="text-xs text-muted-foreground mb-1">
-                          {doc.description}
-                        </p>
-                        <p className="text-xs text-primary font-medium">
-                          {doc.formats}
-                        </p>
-                      </div>
-                    </div>
-                  )
-                })}
-              </CardContent>
-            </Card>
-
             {/* Security Notice */}
             <Card>
               <CardHeader>
@@ -191,34 +162,6 @@ export default function UploadPage() {
                 <div className="flex items-start space-x-2">
                   <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
                   <span>Files are automatically deleted after processing</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Upload Tips */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-lg">
-                  <AlertCircle className="h-5 w-5 text-blue-500" />
-                  <span>Upload Tips</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-start space-x-2">
-                  <span className="text-primary">•</span>
-                  <span>Ensure documents are clear and readable</span>
-                </div>
-                <div className="flex items-start space-x-2">
-                  <span className="text-primary">•</span>
-                  <span>Maximum file size: 10MB per file</span>
-                </div>
-                <div className="flex items-start space-x-2">
-                  <span className="text-primary">•</span>
-                  <span>Upload up to 5 files at once</span>
-                </div>
-                <div className="flex items-start space-x-2">
-                  <span className="text-primary">•</span>
-                  <span>Supported formats: PDF, JPG, PNG, DOC, DOCX</span>
                 </div>
               </CardContent>
             </Card>

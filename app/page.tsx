@@ -95,6 +95,7 @@ export default function HomePage() {
                     {language === 'bn' ? 'মূল্য দেখুন' : 'View Pricing'}
                   </Button>
                 </Link>
+                {/* Quick Action removed as requested */}
               </div>
             </div>
           </div>
@@ -260,21 +261,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-background border-t py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-2">
-              <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
-            </div>
-            <p className={`text-sm text-muted-foreground ${
-              language === 'bn' ? 'bangla-text' : ''
-            }`}>
-              © 2025 {t('landing.footer')}
-            </p>
+      {/* Footer moved to RootLayout (conditionally hidden on /workspace) */}
+
+      {/* Floating Calculator Bubble */}
+      <Link href="/calculation" aria-label="Open Tax Calculator" title={language === 'bn' ? 'ক্যালকুলেটর' : 'Calculator'}>
+        <div className="fixed bottom-6 right-6 z-50">
+          <div className="h-14 w-14 rounded-full bg-gradient-to-br from-primary-600 to-primary-500 shadow-2xl flex items-center justify-center text-white hover:scale-105 transition-transform ring-2 ring-primary-400/25">
+            <span className="sr-only">{language === 'bn' ? 'ক্যালকুলেটর খুলুন' : 'Open Calculator'}</span>
+            <Calculator className="h-6 w-6" />
           </div>
         </div>
-      </footer>
+      </Link>
     </div>
   )
 }

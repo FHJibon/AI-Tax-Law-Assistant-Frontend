@@ -10,6 +10,7 @@ const resources = {
       'nav.chat': 'Tax Assistant',
       'nav.upload': 'Upload Documents',
       'nav.workspace': 'Workspace',
+      'nav.calculation': 'Calculation',
       'nav.dashboard': 'Dashboard',
       'nav.login': 'Login',
       'nav.signup': 'Sign Up',
@@ -54,7 +55,7 @@ const resources = {
       'upload.title': 'Upload Documents',
       'upload.subtitle': 'Upload your salary certificates, income statements, and other tax documents',
       'upload.dropzone': 'Drag and drop files here, or click to select',
-      'upload.supported': 'Supported formats: PDF, DOC, DOCX, JPG, PNG',
+      'upload.supported': 'Supported formats: PDF, JPG, PNG',
       'upload.processing': 'Processing documents...',
       'upload.success': 'Documents uploaded successfully',
       
@@ -62,7 +63,7 @@ const resources = {
       'dashboard.title': 'Tax Dashboard',
       'dashboard.returns': 'My Returns',
       'dashboard.pending': 'Pending Actions',
-      'dashboard.advice': 'Tax Advice',
+      
       'dashboard.overview': 'Overview',
       'dashboard.income': 'Total Income',
       'dashboard.tax': 'Tax Liability',
@@ -108,6 +109,7 @@ const resources = {
       'nav.chat': 'কর সহায়ক',
       'nav.upload': 'নথি আপলোড',
       'nav.workspace': 'ওয়ার্কস্পেস',
+      'nav.calculation': 'ক্যালকুলেটর',
       'nav.dashboard': 'ড্যাশবোর্ড',
       'nav.login': 'লগইন',
       'nav.signup': 'সাইন আপ',
@@ -152,7 +154,7 @@ const resources = {
       'upload.title': 'নথি আপলোড করুন',
       'upload.subtitle': 'আপনার বেতন সার্টিফিকেট, আয়ের বিবৃতি এবং অন্যান্য কর নথি আপলোড করুন',
       'upload.dropzone': 'ফাইলগুলি এখানে টেনে আনুন বা নির্বাচন করতে ক্লিক করুন',
-      'upload.supported': 'সমর্থিত ফরম্যাট: PDF, DOC, DOCX, JPG, PNG',
+      'upload.supported': 'সমর্থিত ফরম্যাট: PDF, JPG, PNG',
       'upload.processing': 'নথি প্রক্রিয়াকরণ করা হচ্ছে...',
       'upload.success': 'নথি সফলভাবে আপলোড হয়েছে',
       
@@ -160,7 +162,7 @@ const resources = {
       'dashboard.title': 'কর ড্যাশবোর্ড',
       'dashboard.returns': 'আমার রিটার্ন',
       'dashboard.pending': 'অপেক্ষমাণ কাজ',
-      'dashboard.advice': 'কর পরামর্শ',
+      
       'dashboard.overview': 'সংক্ষিপ্ত বিবরণ',
       'dashboard.income': 'মোট আয়',
       'dashboard.tax': 'কর দায়বদ্ধতা',

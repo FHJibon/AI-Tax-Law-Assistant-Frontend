@@ -29,7 +29,7 @@ export default function PrivacyPage() {
           <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
             <Calendar className="h-4 w-4" />
             <span className={language === 'bn' ? 'bangla-text' : ''}>
-              {language === 'bn' ? 'শেষ আপডেট: ১ জানুয়ারি, ২০২৪' : 'Last updated: January 1, 2024'}
+              {language === 'bn' ? 'শেষ আপডেট: ১ সেপ্টেম্বর, ২০২৫' : 'Last updated: September 01, 2025'}
             </span>
           </div>
         </div>
@@ -175,8 +175,7 @@ export default function PrivacyPage() {
                     এই গোপনীয়তা নীতি বা আপনার ব্যক্তিগত তথ্য সম্পর্কে প্রশ্ন বা উদ্বেগ থাকলে, আমাদের সাথে যোগাযোগ করুন:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                    <li>ইমেইল: privacy@taxassistant.com</li>
-                    <li>ফোন: +880 1234-567890</li>
+                    <li>ইমেইল: ferdoushasanjibon25@gmail.com</li>
                     <li>ঠিকানা: ঢাকা, বাংলাদেশ</li>
                   </ul>
                 </section>
@@ -325,8 +324,7 @@ export default function PrivacyPage() {
                     If you have questions or concerns about this Privacy Policy or your personal information, please contact us at:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                    <li>Email: privacy@taxassistant.com</li>
-                    <li>Phone: +880 1234-567890</li>
+                    <li>Email: ferdoushasanjibon25@gmail.com</li>
                     <li>Address: Dhaka, Bangladesh</li>
                   </ul>
                 </section>

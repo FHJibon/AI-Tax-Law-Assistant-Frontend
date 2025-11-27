@@ -29,7 +29,7 @@ export default function TermsPage() {
           <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
             <Calendar className="h-4 w-4" />
             <span className={language === 'bn' ? 'bangla-text' : ''}>
-              {language === 'bn' ? 'শেষ আপডেট: ১ জানুয়ারি, ২০২৪' : 'Last updated: January 1, 2024'}
+              {language === 'bn' ? 'শেষ আপডেট: ১ সেপ্টেম্বর, ২০২৫' : 'Last updated: September 01, 2025'}
             </span>
           </div>
         </div>
@@ -115,8 +115,7 @@ export default function TermsPage() {
                     এই শর্তাবলী সম্পর্কে আপনার কোন প্রশ্ন থাকলে, অনুগ্রহ করে আমাদের সাথে যোগাযোগ করুন:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                    <li>ইমেইল: legal@taxassistant.com</li>
-                    <li>ফোন: +880 1234-567890</li>
+                    <li>ইমেইল: ferdoushasanjibon25@gmail.com</li>
                     <li>ঠিকানা: ঢাকা, বাংলাদেশ</li>
                   </ul>
                 </section>
@@ -205,8 +204,7 @@ export default function TermsPage() {
                     If you have any questions about these Terms, please contact us at:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                    <li>Email: legal@taxassistant.com</li>
-                    <li>Phone: +880 1234-567890</li>
+                    <li>Email: ferdoushasanjibon25@gmail.com</li>
                     <li>Address: Dhaka, Bangladesh</li>
                   </ul>
                 </section>

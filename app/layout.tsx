@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { I18nProvider } from '@/lib/i18n-provider'
 import { Toaster } from '@/components/ui/toaster'
+import ConditionalFooter from '@/components/ConditionalFooter'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -37,6 +38,7 @@ export default function RootLayout({
               {children}
             </div>
             <Toaster />
+            <ConditionalFooter />
           </I18nProvider>
         </ThemeProvider>
       </body>
